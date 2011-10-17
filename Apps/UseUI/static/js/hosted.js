@@ -2,6 +2,7 @@ userEmail = "";
 userName = "";
 userOptin = '';
 externalHost = '';
+var clicked = false;
 
 function setUserGlobals(data) {
     userEmail = data.email;
@@ -22,22 +23,43 @@ function setUserGlobals(data) {
     $("#userMenu").width(width);
 }
 
+function closeUserMenu() {
+    $('#userMenu').hide();
+    $('#customLogout').removeClass('userMenu');
+    $('#customLogout').removeClass('userMenuActive');
+}
+
+function checkClick() {
+    if (document.activeElement && document.activeElement === document.getElementById('appFrame')) {
+        closeUserMenu();
+    } else {
+        window.setTimeout(checkClick, 200);
+    }
+}
+
+function openUserMenu() {
+    $('#userMenu').show();
+    $('#customLogout').addClass('userMenu');
+    $('#customLogout').addClass('userMenuActive');
+    checkClick();
+}
+
 $(document).ready(function() {
     $("#customLogout").hover(function() {
         $("#customLogout").toggleClass("userMenuHover");
     });
 
     $("#customLogout").click(function() {
-        $("#customLogout").toggleClass("userMenu");
-        $("#userMenu").toggle();
-        $("#customLogout").toggleClass("userMenuActive");
+        if ($('customLogout').hasClass('userMenuActive')) {
+            closeUserMenu();
+        } else {
+            openUserMenu();
+        }
         return false;
     });
 
     $('.header').click(function() {
-        $('#userMenu').hide();
-        $('#customLogout').removeClass('userMenu');
-        $('#customLogout').removeClass('userMenuActive');
+        closeUserMenu();
     });
 
     if (userOptin === "true") {
