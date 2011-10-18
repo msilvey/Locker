@@ -4,6 +4,7 @@ userOptin = '';
 externalHost = '';
 var clicked = false;
 userOptin = '';
+externalHost = '';
 
 function setUserGlobals(data) {
     userEmail = data.email;
@@ -65,6 +66,5 @@ $(document).ready(function() {
 
     if (userOptin === "true") {
         $(".app-page").append('<script type="text/javascript" charset="utf-8" src="js/ga.js"></script>');
-        
     }
 });

@@ -438,6 +438,7 @@ function drawViewer(viewer, isSelected) {
                 log("forced background syncing to github");
                 $.get('/synclets/github/run?id=repos', function(){});
                 showGritter('syncgithub');
+                $.get(externalHost + '/track/syncviewers', function(){ console.log('analytics: tracked syncviewers')});
                 return;
             }
             if (viewer.handle === 'devdocs') {
