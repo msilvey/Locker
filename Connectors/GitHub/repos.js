@@ -1,4 +1,5 @@
 var GitHubApi = require("github").GitHubApi
+  , lconfig = require('../../Common/node/lconfig')
   , request = require('request')
   , github = new GitHubApi()
   , async = require('async')
@@ -8,6 +9,8 @@ var GitHubApi = require("github").GitHubApi
   , auth
   , viewers = []
   ;
+
+lconfig.load('../../Config/config.json');
 
 exports.sync = function(processInfo, cb) {
     auth = processInfo.auth;
@@ -63,7 +66,10 @@ exports.syncRepos = function(callback) {
                         }
                         viewers.push({id:repo.id, manifest:manifest, at:repo.pushed_at, viewer:js.viewer});
                         request.get({url:lockerUrl+'/map/upsert?manifest=Me/github/'+manifest}, function(err, resp) {
-                            cb();
+                            request.get(lconfig.dashboard.customHost + '/track/installedviewers', function(){ 
+                                console.error('analytics: tracked installedviewers');
+                                cb();
+                            });
                         });
                     });
                 });

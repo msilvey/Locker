@@ -1,11 +1,14 @@
 userEmail = "";
 userName = "";
 userOptin = '';
+externalHost = '';
 
 function setUserGlobals(data) {
     userEmail = data.email;
     userName = data.name;
     userOptin = data.optin;
+    externalHost = data.externalHost;
+    
     $(".userEmail").text(userEmail);
     $(".user-name").text(userName);
 
