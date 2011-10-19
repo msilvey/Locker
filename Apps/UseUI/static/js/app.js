@@ -439,7 +439,6 @@ function drawViewer(viewer, isSelected) {
                 log("forced background syncing to github");
                 $.get('/synclets/github/run?id=repos', function(){});
                 showGritter('syncgithub');
-<<<<<<< HEAD
                 try {
                   _gaq.push(['_trackPageview', '/track/syncviewers']);
                 } catch(err) {
@@ -448,13 +447,7 @@ function drawViewer(viewer, isSelected) {
                 return;
             }
             if (viewer.handle === 'devdocs') {
-                $("#appFrame")[0].contentWindow.location.replace("/Me/devdocs/"); // HACK WTF OMG IrAGEuBroSER!
-=======
-                return;
-            }
-            if (viewer.handle === 'devdocs') {
                 $("#appFrame")[0].contentWindow.location.replace("/Me/devdocs/");
->>>>>>> master
                 drawViewers();
             } else {
                 setViewer(viewer.viewer, viewer.handle, function() {
