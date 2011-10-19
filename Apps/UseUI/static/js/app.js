@@ -594,10 +594,7 @@ function expandServices()
     $('#services #choose-services').fadeIn();
     $('#services #service-selector').fadeIn();
   }});
-<<<<<<< HEAD
-=======
   $('#appFrame').animate({ height: $(window).height() - 96 - $('.header').height() }, { duration: 200 });
->>>>>>> master
 }
 
 function resizeFrame() {
