@@ -11,6 +11,8 @@ var searchSelector = '.search-header-row:not(.template),.search-result-row:not(.
 if ( ! window.location.origin) window.location.origin = window.location.protocol+"//"+window.location.host;
 var externalBase = window.location.origin;
 
+var _gaq = _gaq || [];
+
 $(document).ready(
     function() {
         // any mouse activity resets it
@@ -440,7 +442,9 @@ function drawViewer(viewer, isSelected) {
                 $.get('/synclets/github/run?id=repos', function(){});
                 showGritter('syncgithub');
                 try {
-                    _gaq.push(['_trackPageview', '/track/syncviewers']);
+                    if (typeof _gaq !== "undefined" && _gaq !== null) {
+                        _gaq.push(['_trackPageview', '/track/syncviewers']);
+                    }
                 } catch(err) {
                     console.error(err);
                 }             
@@ -471,14 +475,15 @@ function drawViewer(viewer, isSelected) {
 function drawViewers() {
     log('drawViewers');
     $.getJSON('viewers', function(data) {
-        console.error("DEBUG: data", data);
         $('.viewer:not(.template)').remove();
         var viewersToRender = data.available[app];
         for(var i in viewersToRender) {
             drawViewer(viewersToRender[i], data.selected[app] === viewersToRender[i].handle);
             if (viewersToRender[i].author !== 'Singly') {
                try {
-                  _gaq.push(['_trackPageview', '/track/installedviewers']);
+                  if (typeof _gaq !== "undefined" && _gaq !== null) {
+                      _gaq.push(['_trackPageview', '/track/installedviewers']);
+                  }
                } catch(err) {
                    console.error(err);
                }
