@@ -440,10 +440,10 @@ function drawViewer(viewer, isSelected) {
                 $.get('/synclets/github/run?id=repos', function(){});
                 showGritter('syncgithub');
                 try {
-                  _gaq.push(['_trackPageview', '/track/syncviewers']);
+                    _gaq.push(['_trackPageview', '/track/syncviewers']);
                 } catch(err) {
                     console.error(err);
-                }
+                }             
                 return;
             }
             if (viewer.handle === 'devdocs') {
@@ -477,11 +477,12 @@ function drawViewers() {
         for(var i in viewersToRender) {
             drawViewer(viewersToRender[i], data.selected[app] === viewersToRender[i].handle);
             if (viewersToRender[i].author !== 'Singly') {
-                try {
-                   _gaq.push(['_trackPageview', '/track/installedviewers']);
-                } catch(err) {
-                console.error(err);
-                }
+               try {
+                  _gaq.push(['_trackPageview', '/track/installedviewers']);
+               } catch(err) {
+                   console.error(err);
+               }
+               
             }
         }
         var addViewerView = {
