@@ -29,6 +29,7 @@ $(document).ready(
             app = $(this).attr('id');
             if ($("#services:visible").length > 0) closeServices(0);
             window.location.hash = app;
+            $('.devdocs-box-container.active').removeClass('active');
             renderApp();
             return false;
         });
@@ -438,6 +439,7 @@ function drawViewer(viewer, isSelected) {
                 log("forced background syncing to github");
                 $.get('/synclets/github/run?id=repos', function(){});
                 showGritter('syncgithub');
+<<<<<<< HEAD
                 try {
                   _gaq.push(['_trackPageview', '/track/syncviewers']);
                 } catch(err) {
@@ -447,6 +449,12 @@ function drawViewer(viewer, isSelected) {
             }
             if (viewer.handle === 'devdocs') {
                 $("#appFrame")[0].contentWindow.location.replace("/Me/devdocs/"); // HACK WTF OMG IrAGEuBroSER!
+=======
+                return;
+            }
+            if (viewer.handle === 'devdocs') {
+                $("#appFrame")[0].contentWindow.location.replace("/Me/devdocs/");
+>>>>>>> master
                 drawViewers();
             } else {
                 setViewer(viewer.viewer, viewer.handle, function() {
@@ -593,10 +601,14 @@ function expandServices()
     $('#services #choose-services').fadeIn();
     $('#services #service-selector').fadeIn();
   }});
+<<<<<<< HEAD
+=======
+  $('#appFrame').animate({ height: $(window).height() - 96 - $('.header').height() }, { duration: 200 });
+>>>>>>> master
 }
 
 function resizeFrame() {
-    $('#appFrame').height($(window).height() - $('#services').height() - $('.header').height() - 6);
+    $('#appFrame').height($(window).height() - $('#services').height() - $('.header').height());
     $("#appFrame").width($(window).width());
 }
 

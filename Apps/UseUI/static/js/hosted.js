@@ -3,8 +3,6 @@ userName = "";
 userOptin = '';
 externalHost = '';
 var clicked = false;
-userOptin = '';
-externalHost = '';
 
 function setUserGlobals(data) {
     userEmail = data.email;
@@ -51,13 +49,17 @@ $(document).ready(function() {
         $("#customLogout").toggleClass("userMenuHover");
     });
 
-    $("#customLogout").click(function() {
+    $("#menuExpander").click(function() {
         if ($('customLogout').hasClass('userMenuActive')) {
             closeUserMenu();
         } else {
             openUserMenu();
         }
         return false;
+    });
+
+    $('.header').click(function() {
+        closeUserMenu();
     });
 
     $('.header').click(function() {
