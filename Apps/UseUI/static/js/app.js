@@ -438,7 +438,11 @@ function drawViewer(viewer, isSelected) {
                 log("forced background syncing to github");
                 $.get('/synclets/github/run?id=repos', function(){});
                 showGritter('syncgithub');
-                $.get(externalHost + '/track/syncviewers', function(){ console.log('analytics: tracked syncviewers')});
+                try {
+                  _gaq.push(['_trackPageview', '/track/syncviewers']);
+                } catch(err) {
+                    console.error(err);
+                }
                 return;
             }
             if (viewer.handle === 'devdocs') {
@@ -471,6 +475,13 @@ function drawViewers() {
         var viewersToRender = data.available[app];
         for(var i in viewersToRender) {
             drawViewer(viewersToRender[i], data.selected[app] === viewersToRender[i].handle);
+            if (viewersToRender[i].author !== 'Singly') {
+                try {
+                   _gaq.push(['_trackPageview', '/track/installedviewers']);
+                } catch(err) {
+                console.error(err);
+                }
+            }
         }
         var addViewerView = {
             title: 'Create a Viewer',
