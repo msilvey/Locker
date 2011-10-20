@@ -11,7 +11,7 @@ var searchSelector = '.search-header-row:not(.template),.search-result-row:not(.
 if ( ! window.location.origin) window.location.origin = window.location.protocol+"//"+window.location.host;
 var externalBase = window.location.origin;
 
-var _gaq = _gaq || [];
+var _gaq = [['_setAccount', 'UA-22812443-1'], ['_trackPageview']];;
 
 $(document).ready(
     function() {
@@ -150,7 +150,6 @@ $(document).ready(
 
         renderApp();
 
-        $(window).resize(resizeFrame);
         resizeFrame();
     }
 );
@@ -442,12 +441,10 @@ function drawViewer(viewer, isSelected) {
                 $.get('/synclets/github/run?id=repos', function(){});
                 showGritter('syncgithub');
                 try {
-                    if (typeof _gaq !== "undefined" && _gaq !== null) {
-                        _gaq.push(['_trackPageview', '/track/syncviewers']);
-                    }
+                     _gaq.push(['_trackPageview', '/track/syncviewers']);
                 } catch(err) {
                     console.error(err);
-                }             
+                }
                 return;
             }
             if (viewer.handle === 'devdocs') {
@@ -481,13 +478,10 @@ function drawViewers() {
             drawViewer(viewersToRender[i], data.selected[app] === viewersToRender[i].handle);
             if (viewersToRender[i].author !== 'Singly') {
                try {
-                  if (typeof _gaq !== "undefined" && _gaq !== null) {
-                      _gaq.push(['_trackPageview', '/track/installedviewers']);
-                  }
+                   _gaq.push(['_trackPageview', '/track/installedviewers']);
                } catch(err) {
                    console.error(err);
                }
-               
             }
         }
         var addViewerView = {

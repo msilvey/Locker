@@ -62,10 +62,6 @@ $(document).ready(function() {
         closeUserMenu();
     });
 
-    $('.header').click(function() {
-        closeUserMenu();
-    });
-
     if (userOptin === "true") {
         $(".app-page").append('<script type="text/javascript" charset="utf-8" src="js/ga.js"></script>');
     }
