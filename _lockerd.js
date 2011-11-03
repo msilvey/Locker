@@ -76,7 +76,8 @@ exports.alive = false;
             fs.mkdirSync(lconfig.me + '/' + lconfig.mongo.dataDir, 0755);
         }
         mongoProcess = spawn('mongod', ['--dbpath', lconfig.lockerDir + '/' + lconfig.me + '/' + lconfig.mongo.dataDir,
-                                        '--port', lconfig.mongo.port]);
+                                        '--port', lconfig.mongo.port,
+                                        '--bind_ip', lconfig.mongo.host]);
         mongoProcess.stderr.on('data', function(data) {
             console.error('mongod err: ' + data);
         });
@@ -151,7 +152,7 @@ exports.alive = false;
         serviceManager.findInstalled();
 
         // start web server (so we can all start talking)
-        webservice.startService(lconfig.lockerPort, runMigrations);
+        webservice.startService(lconfig.lockerPort, lconfig.lockerHost, runMigrations);
         var lockerPortNext = "1"+lconfig.lockerPort;
         lockerPortNext++;
 

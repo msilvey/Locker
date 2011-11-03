@@ -40,7 +40,7 @@ module.exports = function(passedLockerHost, passedLockerPort, passedPort, passed
     
     app.use(express.static(__dirname + '/static'));
 
-    app.listen(rootPort);
+    app.listen(rootPort, rootHost);
 }
 
 
